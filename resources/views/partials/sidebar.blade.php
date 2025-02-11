@@ -18,8 +18,8 @@
 					<span class="to-hide">Dashboard <i class="fa fa-angle-right pull-right angle-icon"></i></span>
 				</a>	        	
 			</div>
-			<div data-toggle="tooltip" data-placement="right" title="Commissions">
-				<a href="{{route('dashboard')}}">
+			<div data-toggle="tooltip" data-placement="right" title="Projects">
+				<a href="{{route('projects.index')}}">
 					<i class="fas fa-pound-sign"></i>
 					<span class="to-hide">Projects <i class="fa fa-angle-right pull-right angle-icon"></i></span>
 				</a>	        	
@@ -30,18 +30,14 @@
 					<span class="to-hide">Tasks <i class="fa fa-angle-right pull-right angle-icon"></i></span>
 				</a>	        	
 			</div>
-			<div data-toggle="tooltip" data-placement="right" title="Portals">
-				<a href="{{route('dashboard')}}">
-					<i class="fas fa-window-restore"></i>
-					<span class="to-hide">Portals <i class="fa fa-angle-right pull-right angle-icon"></i></span>
-				</a>	        	
-			</div>
+			@if(auth()->user()->isAdmin())
 			<div data-toggle="tooltip" data-placement="right" title="Users">
-				<a href="users.php">
+				<a href="{{route('admin.users')}}">
 					<i class="fas fa-user-friends"></i>
 					<span class="to-hide">Users <i class="fa fa-angle-right pull-right angle-icon"></i></span>
 				</a>	        	
 			</div>
+			@endif
 			<div data-toggle="tooltip" data-placement="right" title="Profile">
 				<a href="{{route('profile.index')}}">
 					<i class="far fa-user"></i>

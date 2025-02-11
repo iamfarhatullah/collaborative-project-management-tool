@@ -19,7 +19,7 @@ Route::middleware('auth', 'preventBackHistory')->group(function () {
     Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/users', [AdminController::class, 'manageUsers'])->name('admin.users');
         Route::put('/admin/users/{user}/update-role', [AdminController::class, 'updateRole'])->name('admin.updateRole');
-
+        Route::resource('projects', ProjectController::class);
     });
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

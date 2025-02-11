@@ -6,17 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up() {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->enum('status', ['Pending', 'Ongoing', 'Completed'])->default('Pending');
             $table->text('description')->nullable();
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    public function down() {
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
         Schema::dropIfExists('projects');
     }
 };
