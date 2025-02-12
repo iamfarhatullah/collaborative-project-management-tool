@@ -25,7 +25,7 @@
 				</a>	        	
 			</div>
 			<div data-toggle="tooltip" data-placement="right" title="Tasks">
-				<a href="{{route('dashboard')}}">
+				<a href="{{route('tasks.index')}}">
 					<i class="fas fa-university"></i>
 					<span class="to-hide">Tasks <i class="fa fa-angle-right pull-right angle-icon"></i></span>
 				</a>	        	
