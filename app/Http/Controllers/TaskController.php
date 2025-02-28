@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\TaskDetail;
+use App\Models\Notification;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -36,22 +37,30 @@ class TaskController extends Controller
             'end_date' => 'required|date|after_or_equal:start_date',
             'status' => 'required|in:Pending,In Process,Completed',
             'description' => 'nullable|string',
-            'users' => 'required|array', // Users must be selected
-            'users.*' => 'exists:users,id',
+            'users' => 'required|array', // Ensure users is an array
+            'users.*' => 'exists:users,id', // Ensure each user exists
         ]);
 
+        // Create Task
         $task = Task::create($request->only(['title', 'project_id', 'start_date', 'end_date', 'status', 'description']));
 
-        // Assign users to the task
+        // Assign users & Send Notifications in One Loop
         foreach ($request->users as $user_id) {
             TaskDetail::create([
                 'task_id' => $task->id,
                 'user_id' => $user_id
             ]);
+
+            Notification::create([
+                'task_id' => $task->id,
+                'user_id' => $user_id,
+                'message' => "You have been assigned a new task: {$task->title}",
+            ]);
         }
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully!');
     }
+
 
     // Show the edit form
     public function edit(Task $task)

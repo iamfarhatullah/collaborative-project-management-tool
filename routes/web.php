@@ -16,13 +16,14 @@ Route::middleware(['auth', 'verified', 'preventBackHistory'])->group(function ()
 
 Route::middleware('auth', 'preventBackHistory')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/users', [AdminController::class, 'manageUsers'])->name('admin.users');
         Route::put('/admin/users/{user}/update-role', [AdminController::class, 'updateRole'])->name('admin.updateRole');
         Route::resource('projects', ProjectController::class);
         Route::resource('tasks', TaskController::class);
-    });
+    // });
 
+    Route::post('/notifications/read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -11,13 +11,15 @@ class Task extends Model
 
     protected $fillable = ['title', 'project_id', 'start_date', 'end_date', 'status', 'description'];
 
+    // Belongs to a project
     public function project()
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class, 'project_id');
     }
 
+    // Many-to-many relationship with Users
     public function users()
     {
-        return $this->belongsToMany(User::class, 'task_details');
+        return $this->belongsToMany(User::class, 'task_details', 'task_id', 'user_id');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,10 +35,11 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('success', 'Project created successfully!');
     }
 
-    public function show(Project $project)
-    {
-        return view('projects.show', compact('project'));
-    }
+    public function show($id)
+{
+    $project = Project::with('tasks.users')->findOrFail($id);
+    return view('projects.show', compact('project'));
+}
 
     public function edit(Project $project)
     {

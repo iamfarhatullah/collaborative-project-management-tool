@@ -22,4 +22,11 @@
         <p>Welcome, User! You can complete assigned tasks.</p>
         <a href="{{ route('dashboard') }}">View My Tasks</a>
     @endif
+
+    @foreach (auth()->user()->notifications->where('is_read', false) as $notification)
+        <div class="alert alert-info">
+            {{ $notification->message }}
+            <a href="{{ route('tasks.show', $notification->task_id) }}">View Task</a>
+        </div>
+    @endforeach
 @endsection

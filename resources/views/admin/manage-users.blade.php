@@ -1,17 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Manage Users</h1>
-    <table>
-        <tr>
+<div class="form-wrapper">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-4">
+            <h2 class="box-title">Manage Users</h2>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
             <th>Actions</th>
-        </tr>
+        </thead>
+        <tbody>
         @foreach ($users as $user)
             <tr>
-                <td>{{ $user->name }}</td>
+                <td><strong>{{ $user->name }}</strong></td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
                 <td>
@@ -24,10 +30,13 @@
                             <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
                             <option value="inactive" {{ $user->role == 'inactive' ? 'selected' : '' }}>In-Active</option>
                         </select>
-                        <button type="submit">Update</button>
+                        <button type="submit" class="btn btn-xs btn-primary">Update</button>
                     </form>
                 </td>
             </tr>
         @endforeach
+        </tbody>
     </table>
+
+</div>
 @endsection
