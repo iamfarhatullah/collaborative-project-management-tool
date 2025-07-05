@@ -61,6 +61,12 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Task created successfully!');
     }
 
+    public function show(Task $task)
+    {
+        $task->load('project', 'users'); // Eager load related data
+
+        return view('tasks.show', compact('task'));
+    }
 
     // Show the edit form
     public function edit(Task $task)
