@@ -7,7 +7,9 @@
             <h3 class="box-title">Tasks Details</h3>
         </div>
         <div class="col-md-6 col-sm-6 col-4"><br>
+            @if(!auth()->user()->isUser())
             <a href="{{ route('tasks.create') }}" class="btn btn-primary mb-3 pull-right">Create new</a>
+            @endif
         </div>
     </div>
     <hr>
