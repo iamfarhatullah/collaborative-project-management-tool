@@ -180,7 +180,7 @@
     </div>
     <br>
 </div>
-<p>Welcome, Manager! <br> You can assign tasks and manage projects.</p>
+<p>Welcome, Manager! <br> You can only assign tasks and manage projects.</p>
 <a href="{{ route('projects.index') }}" class="btn btn-info">View Projects</a>
 <a href="{{ route('tasks.index') }}" class="btn btn-primary">Assign Tasks</a>
 @endif
@@ -195,7 +195,8 @@
 @foreach (auth()->user()->notifications->where('is_read', false) as $notification)
 <div class="alert alert-warning">
     {{ $notification->message }}
-    <a href="{{ route('tasks.show', $notification->task_id) }}" class="btn btn-sm btn-warning">View</a>
+    <a href="{{ route('tasks.show', $notification->task_id) }}" class="btn btn-sm btn-warning">View</a><br>
+    <p style="font-size: 10px;">{{ $notification->created_at }}</p>
 </div>
 @endforeach
 @endsection
