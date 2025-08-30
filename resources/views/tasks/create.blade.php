@@ -17,7 +17,7 @@
                 <select name="project_id" class="form-field" required>
                     <option value="">Select a Project</option>
                     @foreach($projects as $project)
-                        <option value="{{ $project->id }}">{{ $project->name }}</option>
+                    <option value="{{ $project->id }}">{{ $project->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -50,10 +50,14 @@
             <div class="col-md-12">
                 <label class="form-label">Assign Users</label>
                 @foreach($users as $user)
-                    <div class="form-check">
-                        <input type="checkbox" name="users[]" value="{{ $user->id }}" class="form-check-input">
-                        <label class="form-check-label">{{ $user->name }}</label>
-                    </div>
+                <div class="form-check">
+                    <input type="checkbox"
+                        name="users[]"
+                        value="{{ $user->id }}"
+                        class="form-check-input"
+                        @if($user->id == auth()->id()) checked disabled @endif>
+                    <label class="form-check-label">{{ $user->name }}</label>
+                </div>
                 @endforeach
             </div>
         </div>

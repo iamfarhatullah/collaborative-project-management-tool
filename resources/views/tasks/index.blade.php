@@ -31,6 +31,7 @@
             </thead>
             <tbody>
                 @foreach($tasks as $task)
+                @if($task->users->contains(auth()->id()))
                 <tr>
                     <td><strong>{{ $task->title }}</strong></td>
                     <td>{{ $task->project->name }}</td>
@@ -53,7 +54,9 @@
                         @endif
                     </td>
                 </tr>
+                @endif
                 @endforeach
+
             </tbody>
         </table>
         @endif
